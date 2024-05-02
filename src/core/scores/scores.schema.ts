@@ -14,8 +14,8 @@ export class Score {
   @Prop({ required: true })
   score: number;
 
-  @Prop({ required: true, type: Types.ObjectId, ref: User.name })
-  user: Types.ObjectId;
+  @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
+  user: User;
 }
 
 export const ScoreSchema = SchemaFactory.createForClass(Score);

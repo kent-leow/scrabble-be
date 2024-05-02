@@ -3,10 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Score } from '~/core/scores/scores.schema';
 import { Model, Types } from 'mongoose';
 import { CreateScoreDto } from '~/core/scores/dto/create-score.dto';
+import { User } from '~/core/users/users.schema';
 
 @Injectable()
 export class ScoresService {
-  constructor(@InjectModel(Score.name) private scoreModel: Model<Score>) {}
+  constructor(
+    @InjectModel(Score.name) private scoreModel: Model<Score>,
+    @InjectModel(User.name) private userModel: Model<User>,
+  ) {}
 
   async create(userId: Types.ObjectId, score: CreateScoreDto): Promise<Score> {
     const duplicatedScore = await this.scoreModel.findOne({
@@ -20,6 +24,11 @@ export class ScoresService {
   }
 
   async findAll(): Promise<Score[]> {
-    return this.scoreModel.find().sort({ score: 'desc' }).limit(10).exec();
+    return this.scoreModel
+      .find()
+      .sort({ score: 'desc' })
+      .limit(10)
+      .populate('user', 'username')
+      .exec();
   }
 }
