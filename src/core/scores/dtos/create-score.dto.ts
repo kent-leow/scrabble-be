@@ -2,7 +2,7 @@ import { IsNotEmpty, Validate } from 'class-validator';
 import { ScoreValidator } from '~/core/scores/validators/score.validator';
 
 export class CreateScoreDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Empty string is not allowed.' })
   string: string;
 
   @Validate(ScoreValidator)
