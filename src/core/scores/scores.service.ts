@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Score } from '~/core/scores/scores.schema';
 import { Model, Types } from 'mongoose';
-import { CreateScoreDto } from '~/core/scores/dto/create-score.dto';
+import { CreateScoreDto } from '~/core/scores/dtos/create-score.dto';
 import { User } from '~/core/users/users.schema';
 
 @Injectable()
