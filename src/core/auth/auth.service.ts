@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -9,6 +11,7 @@ import * as argon2 from 'argon2';
 import { Types } from 'mongoose';
 import { AuthTokens } from '~/core/auth/dto/AuthTokens';
 import { User } from '~/core/users/users.schema';
+import { CreateUserDto } from '~/core/users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -17,14 +20,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(username: string, pass: string): Promise<void> {
-    const user = await this.usersService.findOne(username);
+  async signUp(createUserDto: CreateUserDto): Promise<void> {
+    const user = await this.usersService.findOne(createUserDto.username);
     if (user) {
-      throw new UnauthorizedException();
+      throw new HttpException('User already exists', HttpStatus.CONFLICT);
     }
     await this.usersService.create({
-      username,
-      password: await this.hashData(pass),
+      username: createUserDto.username,
+      password: await this.hashData(createUserDto.password),
     });
   }
 
