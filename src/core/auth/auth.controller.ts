@@ -12,6 +12,8 @@ import { AuthService } from '~/core/auth/auth.service';
 import { AuthGuard } from '~/core/auth/auth.guard';
 import { AuthGuardRequest } from '~/core/auth/auth.type';
 import { CreateUserDto } from '~/core/users/dto/create-user.dto';
+import { SignInDto } from '~/core/users/dto/sign-in.dto';
+import { RefreshDto } from '~/core/users/dto/refresh.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -25,14 +27,14 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, string>) {
-    return this.authService.signIn(signInDto.username, signInDto.password);
+  signIn(@Body() signInDto: SignInDto) {
+    return this.authService.signIn(signInDto);
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('refresh')
-  refresh(@Body() body: Record<string, string>) {
-    return this.authService.refresh(body.refresh_token);
+  refresh(@Body() refreshDto: RefreshDto) {
+    return this.authService.refresh(refreshDto);
   }
 
   @UseGuards(AuthGuard)

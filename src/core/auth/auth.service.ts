@@ -9,9 +9,11 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '~/core/users/users.service';
 import * as argon2 from 'argon2';
 import { Types } from 'mongoose';
-import { AuthTokens } from '~/core/auth/dto/AuthTokens';
+import { AuthTokensDto } from '~/core/auth/dto/auth-tokens.dto';
 import { User } from '~/core/users/users.schema';
 import { CreateUserDto } from '~/core/users/dto/create-user.dto';
+import { SignInDto } from '~/core/users/dto/sign-in.dto';
+import { RefreshDto } from '~/core/users/dto/refresh.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,9 +33,12 @@ export class AuthService {
     });
   }
 
-  async signIn(username: string, pass: string): Promise<AuthTokens> {
-    const user = await this.usersService.findOne(username);
-    if (!user || !(user && (await argon2.verify(user.password, pass)))) {
+  async signIn(signInDto: SignInDto): Promise<AuthTokensDto> {
+    const user = await this.usersService.findOne(signInDto.username);
+    if (
+      !user ||
+      !(user && (await argon2.verify(user.password, signInDto.password)))
+    ) {
       throw new UnauthorizedException();
     }
     return this.generateNewAuthTokens(user);
@@ -43,11 +48,13 @@ export class AuthService {
     await this.usersService.update(userId, { refreshToken: undefined });
   }
 
-  async refresh(refreshToken: string): Promise<AuthTokens> {
-    if (!(await this.jwtService.verifyAsync(refreshToken))) {
+  async refresh(refreshDto: RefreshDto): Promise<AuthTokensDto> {
+    if (!(await this.jwtService.verifyAsync(refreshDto.refreshToken))) {
       throw new BadRequestException();
     }
-    const user = await this.usersService.findOneByRefreshToken(refreshToken);
+    const user = await this.usersService.findOneByRefreshToken(
+      refreshDto.refreshToken,
+    );
     if (!user) {
       throw new BadRequestException();
     }
@@ -62,10 +69,10 @@ export class AuthService {
     await this.usersService.update(user._id, { refreshToken });
 
     return {
-      access_token: await this.jwtService.signAsync(payload, {
+      accessToken: await this.jwtService.signAsync(payload, {
         expiresIn: '15m',
       }),
-      refresh_token: refreshToken,
+      refreshToken: refreshToken,
     };
   }
 
