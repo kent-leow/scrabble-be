@@ -2,11 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '~/app.module';
 import { useContainer } from 'class-validator';
 import { ValidationPipe } from '@nestjs/common';
+import configuration from '~/utils/config/configuration';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {});
   app.enableCors({
-    origin: 'http://localhost:3001',
+    origin: configuration().ALLOWED_HOSTS,
     credentials: true,
   });
 

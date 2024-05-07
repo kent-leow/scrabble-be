@@ -14,7 +14,7 @@ import { CreateScoreDto } from '~/core/scores/dtos/create-score.dto';
 import { Score } from '~/core/scores/scores.schema';
 import { AuthGuard } from '~/core/auth/guards/auth.guard';
 import { AuthGuardRequest } from '~/core/auth/auth.type';
-import { scoringRules } from '~/shared/constants';
+import { scoringRules } from '~/utils/constants/constants';
 import { Roles } from '~/core/auth/decorators/roles.decorator';
 import { Role } from '~/core/users/enums/role.enum';
 

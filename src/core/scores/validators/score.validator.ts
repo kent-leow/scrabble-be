@@ -4,7 +4,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import { scoringRules } from '~/shared/constants';
+import { scoringRules } from '~/utils/constants/constants';
 import { CreateScoreDto } from '~/core/scores/dtos/create-score.dto';
 
 @ValidatorConstraint({ name: 'string', async: true })
