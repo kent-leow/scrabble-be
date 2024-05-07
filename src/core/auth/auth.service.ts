@@ -9,11 +9,11 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '~/core/users/users.service';
 import * as argon2 from 'argon2';
 import { Types } from 'mongoose';
-import { AuthTokensDto } from '~/core/auth/dto/auth-tokens.dto';
+import { AuthTokensDto } from '~/core/auth/dtos/auth-tokens.dto';
 import { User } from '~/core/users/users.schema';
-import { CreateUserDto } from '~/core/users/dto/create-user.dto';
-import { SignInDto } from '~/core/users/dto/sign-in.dto';
-import { RefreshDto } from '~/core/users/dto/refresh.dto';
+import { CreateUserDto } from '~/core/users/dtos/create-user.dto';
+import { SignInDto } from '~/core/users/dtos/sign-in.dto';
+import { RefreshDto } from '~/core/users/dtos/refresh.dto';
 
 @Injectable()
 export class AuthService {

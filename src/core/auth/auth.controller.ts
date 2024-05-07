@@ -11,9 +11,9 @@ import {
 import { AuthService } from '~/core/auth/auth.service';
 import { AuthGuard } from '~/core/auth/auth.guard';
 import { AuthGuardRequest } from '~/core/auth/auth.type';
-import { CreateUserDto } from '~/core/users/dto/create-user.dto';
-import { SignInDto } from '~/core/users/dto/sign-in.dto';
-import { RefreshDto } from '~/core/users/dto/refresh.dto';
+import { CreateUserDto } from '~/core/users/dtos/create-user.dto';
+import { SignInDto } from '~/core/users/dtos/sign-in.dto';
+import { RefreshDto } from '~/core/users/dtos/refresh.dto';
 
 @Controller('auth')
 export class AuthController {
