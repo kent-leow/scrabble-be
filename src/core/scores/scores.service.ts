@@ -17,7 +17,7 @@ export class ScoresService {
       string: score.string,
     });
     if (duplicatedScore) {
-      throw new HttpException('Duplicated score', HttpStatus.CONFLICT);
+      throw new HttpException('Duplicated word', HttpStatus.CONFLICT);
     }
     const createdScore = new this.scoreModel({ ...score, user: userId });
     return createdScore.save();
