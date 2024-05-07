@@ -14,6 +14,7 @@ import { User } from '~/core/users/users.schema';
 import { CreateUserDto } from '~/core/users/dtos/create-user.dto';
 import { SignInDto } from '~/core/users/dtos/sign-in.dto';
 import { RefreshDto } from '~/core/users/dtos/refresh.dto';
+import { TokenPayloadDto } from '~/core/auth/dtos/token-payload.dto';
 
 @Injectable()
 export class AuthService {
@@ -62,7 +63,11 @@ export class AuthService {
   }
 
   async generateNewAuthTokens(user: User) {
-    const payload = { sub: user._id, username: user.username };
+    const payload: TokenPayloadDto = {
+      sub: user._id,
+      username: user.username,
+      role: user.role,
+    };
     const refreshToken = await this.jwtService.signAsync(payload, {
       expiresIn: '7d',
     });

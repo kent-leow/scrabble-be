@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -11,9 +12,12 @@ import {
 import { ScoresService } from '~/core/scores/scores.service';
 import { CreateScoreDto } from '~/core/scores/dtos/create-score.dto';
 import { Score } from '~/core/scores/scores.schema';
-import { AuthGuard } from '~/core/auth/auth.guard';
+import { AuthGuard } from '~/core/auth/guards/auth.guard';
 import { AuthGuardRequest } from '~/core/auth/auth.type';
 import { scoringRules } from '~/shared/constants';
+import { Roles } from '~/core/auth/decorators/roles.decorator';
+import { Role } from '~/core/users/enums/role.enum';
+import { RolesGuard } from '~/core/auth/guards/roles.guard';
 
 @Controller('scores')
 export class ScoresController {
@@ -37,5 +41,14 @@ export class ScoresController {
   @Get('rules')
   leaderboard(): Record<string, number> {
     return scoringRules;
+  }
+
+  @Roles([Role.ADMIN])
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @Delete()
+  deleteAll(): Promise<void> {
+    return this.scoresService.deleteAll();
   }
 }

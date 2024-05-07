@@ -31,4 +31,8 @@ export class ScoresService {
       .populate('user', 'username')
       .exec();
   }
+
+  async deleteAll(): Promise<void> {
+    await this.scoreModel.deleteMany();
+  }
 }
