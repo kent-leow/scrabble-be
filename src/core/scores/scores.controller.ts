@@ -17,7 +17,6 @@ import { AuthGuardRequest } from '~/core/auth/auth.type';
 import { scoringRules } from '~/shared/constants';
 import { Roles } from '~/core/auth/decorators/roles.decorator';
 import { Role } from '~/core/users/enums/role.enum';
-import { RolesGuard } from '~/core/auth/guards/roles.guard';
 
 @Controller('scores')
 export class ScoresController {
@@ -44,7 +43,6 @@ export class ScoresController {
   }
 
   @Roles([Role.ADMIN])
-  @UseGuards(RolesGuard)
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
   @Delete()
