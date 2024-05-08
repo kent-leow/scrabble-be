@@ -22,7 +22,7 @@ export class User {
   refreshToken: string;
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Score' }] })
-  scores: [Score];
+  scores: Score[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

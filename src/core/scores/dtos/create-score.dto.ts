@@ -6,5 +6,5 @@ export class CreateScoreDto {
   string: string;
 
   @Validate(ScoreValidator)
-  score: string;
+  score: number;
 }
