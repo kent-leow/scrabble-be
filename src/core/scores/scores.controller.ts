@@ -49,7 +49,7 @@ export class ScoresController {
   })
   @HttpCode(HttpStatus.OK)
   @Get('rules')
-  leaderboard(): Record<string, number> {
+  scoreRules(): Record<string, number> {
     return scoringRules;
   }
 
