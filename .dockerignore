@@ -4,3 +4,4 @@ dist
 .husky
 .dockerignore
 Dockerfile
+.idea
