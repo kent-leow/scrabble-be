@@ -1,37 +1,19 @@
 version: '3.8'
 
 services:
-
-  mongodb:
-
+  local_db:
     image: mongo:latest
-
-    container_name: mongodb
-
+    container_name: scrabble-db-local
     ports:
-
       - "27017:27017"
-
     volumes:
-
-      - mongodb_data:/data/db
-
-    #    environment:
-    #
-    #      - MONGO_INITDB_ROOT_USERNAME=admin
-    #
-    #      - MONGO_INITDB_ROOT_PASSWORD=password
-
+      - mongodb_data_local:/data/db
     networks:
-
-      - mongodb_network
+      - mongodb_network_local
 
 volumes:
-
-  mongodb_data:
+  mongodb_data_local:
 
 networks:
-
-  mongodb_network:
-
+  mongodb_network_local:
     driver: bridge

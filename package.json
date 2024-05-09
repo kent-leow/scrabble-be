@@ -18,7 +18,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "pre-commit": "yarn test && lint-staged"
+    "pre-commit": "yarn test && lint-staged",
+    "docker:up": "yarn docker:down && docker-compose -p scrabble-backend -f docker-compose.yml up -d",
+    "docker:down": "docker-compose -p scrabble-backend -f docker-compose.yml down",
+    "docker:down:clean": "docker-compose -p scrabble-backend -f docker-compose.yml down -v",
+    "docker:up:local": "yarn docker:down && docker-compose -p scrabble-backend -f docker-compose.local.yml up -d",
+    "docker:down:local": "docker-compose -p scrabble-backend -f docker-compose.local.yml down",
+    "docker:down:clean:local": "docker-compose -p scrabble-backend -f docker-compose.local.yml down -v"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

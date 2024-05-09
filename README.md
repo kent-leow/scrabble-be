@@ -2,13 +2,26 @@
 
 A very simple scrabble score calculator built with Next.js, Nest.js, and MongoDB.
 
+## Running the app with Docker
+
+```bash
+# docker-compose up
+$ yarn docker:up
+
+# docker-compose down
+$ yarn docker:down
+
+# docker-compose down with volume cleaned
+$ yarn docker:down:clean
+```
+
 ## Installation
 
 ```bash
 $ yarn install
 ```
 
-## Datebase setup
+## Datebase setup locally
 
 ```bash
 # start up volume
@@ -18,7 +31,7 @@ $ docker-compose -p scrabble-backend -f docker-compose.local.yml up -d
 $ docker-compose -p scrabble-backend -f docker-compose.local.yml down -v
 ```
 
-## Running the app
+## Running the app locally
 
 ```bash
 # development

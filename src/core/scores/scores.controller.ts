@@ -17,9 +17,10 @@ import { AuthGuardRequest } from '~/core/auth/auth.type';
 import { scoringRules } from '~/utils/constants/constants';
 import { Roles } from '~/core/auth/decorators/roles.decorator';
 import { Role } from '~/core/users/enums/role.enum';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('scores')
+@ApiBearerAuth()
 @Controller('scores')
 export class ScoresController {
   constructor(private scoresService: ScoresService) {}
