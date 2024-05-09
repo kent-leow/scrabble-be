@@ -25,10 +25,13 @@ $ yarn install
 
 ```bash
 # start up volume
-$ docker-compose -p scrabble-backend -f docker-compose.local.yml up -d
+$ yarn docker:up:local
 
-# stop delete volume
-$ docker-compose -p scrabble-backend -f docker-compose.local.yml down -v
+# stop volume
+$ yarn docker:down:local
+
+# stop and delete volume
+$ yarn docker:down:clean:local
 ```
 
 ## Running the app locally
