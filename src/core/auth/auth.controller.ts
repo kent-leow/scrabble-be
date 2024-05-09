@@ -14,9 +14,10 @@ import { AuthGuardRequest } from '~/core/auth/auth.type';
 import { CreateUserDto } from '~/core/users/dtos/create-user.dto';
 import { SignInDto } from '~/core/users/dtos/sign-in.dto';
 import { RefreshDto } from '~/core/users/dtos/refresh.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
